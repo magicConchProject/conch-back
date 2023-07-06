@@ -52,12 +52,26 @@ export class AppController implements OnGatewayInit {
     @MessageBody() data: any,
     @ConnectedSocket() client: Socket,
   ): Promise<void> {
-    const { model, messages, concept } = data;
+    const {
+      model,
+      messages,
+      concept,
+      temperature,
+      topP,
+      maximumLength,
+      frequencyPenalty,
+      presencePenalty,
+    } = data;
     try {
       const completion: any = await this.appService.postChatGPT(
         model,
         messages,
         concept,
+        temperature,
+        topP,
+        maximumLength,
+        frequencyPenalty,
+        presencePenalty,
       );
 
       completion.data.on('data', (response) => {

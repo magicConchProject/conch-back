@@ -38,7 +38,16 @@ export class AppService {
 
   //[{role: "user", content: "Hello world"}, {role: "user", content: "Hello world"}]
   //"gpt-3.5-turbo"
-  async postChatGPT(model: string, messages: any, concept: string) {
+  async postChatGPT(
+    model: string,
+    messages: any,
+    concept: string,
+    temperature: number,
+    topP: number,
+    maximumLength: number,
+    frequencyPenalty: number,
+    presencePenalty: number,
+  ) {
     const myConcept = {
       role: 'system',
       content: concept,
@@ -52,6 +61,11 @@ export class AppService {
           model,
           messages,
           stream: true,
+          temperature,
+          top_p: topP,
+          max_tokens: maximumLength,
+          frequency_penalty: frequencyPenalty,
+          presence_penalty: presencePenalty,
         },
         { responseType: 'stream' },
       );
