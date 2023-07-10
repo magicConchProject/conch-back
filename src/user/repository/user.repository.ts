@@ -91,4 +91,25 @@ export class UserRepository {
 
   //일단 보류
   async deleteUser(user_id: number) {}
+
+  //토큰 관련 로직 모음
+  //토큰 사용한 만큼 빼는 로직
+  async updateToken(user_id: number, token_diff: number) {
+    await this.userRepository
+      .createQueryBuilder()
+      .update('user')
+      .set({ token: () => `token - ${token_diff}` })
+      .where('id = :id', { id: user_id })
+      .execute();
+  }
+
+  //토큰 더해주는 로직
+  async addToken(user_id: number, token_add: number) {
+    await this.userRepository
+      .createQueryBuilder()
+      .update('user')
+      .set({ token: () => `token + ${token_add}` })
+      .where('id = :id', { id: user_id })
+      .execute();
+  }
 }

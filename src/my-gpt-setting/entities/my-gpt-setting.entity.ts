@@ -1,0 +1,42 @@
+import { User } from 'src/user/entities/user.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+@Entity()
+export class MyGptSetting {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ type: 'text', default: '' })
+  concept: string;
+
+  @Column({ default: 'gpt-3.5-turbo' })
+  model: string;
+
+  @Column({ default: 1 })
+  temperature: number;
+
+  @Column({ default: 1 })
+  topP: number;
+
+  @Column({ default: 512 })
+  maximumLength: number;
+
+  @Column({ default: 0 })
+  frequencyPenalty: number;
+
+  @Column({ default: 0 })
+  presencePenalty: number;
+
+  @OneToOne(() => User, (user) => user.id, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn()
+  user: User;
+}

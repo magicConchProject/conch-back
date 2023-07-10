@@ -16,6 +16,9 @@ import { Post } from './post/entities/post.entity';
 import { Comment } from './comment/entities/comment.entity';
 import { TagModule } from './tag/tag.module';
 import { Tag } from './tag/entities/tag.entity';
+import { MyGptSettingModule } from './my-gpt-setting/my-gpt-setting.module';
+import { ChatGptStoreModule } from './chat-gpt-store/chat-gpt-store.module';
+import { MyGptSetting } from './my-gpt-setting/entities/my-gpt-setting.entity';
 
 @Module({
   imports: [
@@ -29,7 +32,7 @@ import { Tag } from './tag/entities/tag.entity';
       username: process.env.USERNAME,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [User, Group, UserGroup, Post, Comment, Tag],
+      entities: [User, Group, UserGroup, Post, Comment, Tag, MyGptSetting],
       synchronize: true,
     }),
     UserModule,
@@ -39,6 +42,8 @@ import { Tag } from './tag/entities/tag.entity';
     AuthModule,
     UsergroupModule,
     TagModule,
+    MyGptSettingModule,
+    ChatGptStoreModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppController],

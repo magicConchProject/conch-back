@@ -22,6 +22,7 @@ import {
   OnGatewayInit,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import { encode, decode } from 'gpt-3-encoder';
 
 @WebSocketGateway(8080, { cors: { origin: '*' } })
 @Controller()
@@ -83,6 +84,7 @@ export class AppController implements OnGatewayInit {
             ) {
               // console.log('와라!!!!' + parsed.choices[0].delta.content);
               client.emit('gptResponse', parsed.choices[0].delta.content); // 클라이언트에 gptResponse 이벤트와 데이터 전송
+              // console.log(encode(parsed.choices[0].delta.content).length); // 인코딩을 한번 해봅시다
             }
           } catch (error) {
             console.error('으아아아아아' + error);
@@ -91,6 +93,7 @@ export class AppController implements OnGatewayInit {
         }
       });
     } catch (err) {
+      console.error('여기 여기', err);
       client.emit('gptResponse', 'error');
     }
   }

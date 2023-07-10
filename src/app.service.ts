@@ -55,7 +55,6 @@ export class AppService {
         },
         { responseType: 'stream' },
       );
-
       // return chatCompletion.data.choices[0].message;
     } catch (err) {
       console.error(err);
