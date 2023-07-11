@@ -13,8 +13,15 @@ export class MyGptSettingRepository {
     private readonly myGptSetting: Repository<MyGptSetting>,
   ) {}
 
+  async getSetting(user_id: number) {
+    return await this.myGptSetting
+      .createQueryBuilder('my_gpt_setting')
+      .where('userId = :user_id', { user_id })
+      .getOne();
+  }
+
   /**
-   * 전부 갈아끼운다고 보면 될거 같은데...
+   * gpt setting 값 전체 나옴
    */
   async updateSetting(setting: UpdateMyGptSettingDto, user_id: number) {
     const user = await this.userRepository.findOne({ where: { id: user_id } });

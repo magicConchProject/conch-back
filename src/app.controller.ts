@@ -93,7 +93,7 @@ export class AppController implements OnGatewayInit {
         }
       });
     } catch (err) {
-      console.error('여기 여기', err);
+      console.error('여기 여기', err.data);
       client.emit('gptResponse', 'error');
     }
   }

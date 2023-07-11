@@ -19,6 +19,7 @@ import { Tag } from './tag/entities/tag.entity';
 import { MyGptSettingModule } from './my-gpt-setting/my-gpt-setting.module';
 import { ChatGptStoreModule } from './chat-gpt-store/chat-gpt-store.module';
 import { MyGptSetting } from './my-gpt-setting/entities/my-gpt-setting.entity';
+import { ChatGptStore } from './chat-gpt-store/entities/chat-gpt-store.entity';
 
 @Module({
   imports: [
@@ -32,7 +33,16 @@ import { MyGptSetting } from './my-gpt-setting/entities/my-gpt-setting.entity';
       username: process.env.USERNAME,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [User, Group, UserGroup, Post, Comment, Tag, MyGptSetting],
+      entities: [
+        User,
+        Group,
+        UserGroup,
+        Post,
+        Comment,
+        Tag,
+        MyGptSetting,
+        ChatGptStore,
+      ],
       synchronize: true,
     }),
     UserModule,

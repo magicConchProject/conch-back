@@ -13,6 +13,7 @@ import { UserGroup } from 'src/usergroup/entities/usergroup.entity';
 import { Post } from 'src/post/entities/post.entity';
 import { Comment } from 'src/comment/entities/comment.entity';
 import { MyGptSetting } from 'src/my-gpt-setting/entities/my-gpt-setting.entity';
+import { ChatGptStore } from 'src/chat-gpt-store/entities/chat-gpt-store.entity';
 
 @Entity()
 export class User {
@@ -49,6 +50,11 @@ export class User {
 
   @OneToMany(() => Comment, (comment) => comment.user, { cascade: true })
   comments: Comment[];
+
+  @OneToMany(() => ChatGptStore, (chatGptStore) => chatGptStore.user, {
+    cascade: true,
+  })
+  chatGptStore: ChatGptStore[];
 
   @OneToOne(() => MyGptSetting, (myGptSetting) => myGptSetting.user, {
     cascade: true,
