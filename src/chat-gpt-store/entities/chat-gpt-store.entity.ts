@@ -3,6 +3,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -39,7 +40,7 @@ export class ChatGptStore {
   @Column({ default: 0 })
   presencePenalty: number;
 
-  @OneToMany(() => User, (user) => user.id, {
+  @ManyToOne(() => User, (user) => user.id, {
     onDelete: 'CASCADE',
   })
   @JoinColumn()

@@ -20,18 +20,20 @@ export class ChatGptStoreRepository {
   async getStoreList() {
     return await this.chatGptStore
       .createQueryBuilder('chat_gpt_store')
+      .leftJoinAndSelect('chat_gpt_store.user', 'user')
+      .select(['chat_gpt_store', 'user.name'])
       .getMany();
   }
 
   /**
    * store detail 정보 조회
-   * @param user_id
+   * @param id
    * @returns
    */
-  async getStoreDetail(user_id: number) {
+  async getStoreDetail(id: number) {
     return await this.chatGptStore
       .createQueryBuilder('chat_gpt_store')
-      .where('userId = :user_id', { user_id })
+      .where('id = :id', { id })
       .getOne();
   }
 

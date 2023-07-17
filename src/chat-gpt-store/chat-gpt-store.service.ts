@@ -1,19 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { CreateChatGptStoreDto } from './dto/create-chat-gpt-store.dto';
 import { UpdateChatGptStoreDto } from './dto/update-chat-gpt-store.dto';
+import { ChatGptStoreRepository } from './repository/chat-gpt-store.repository';
 
 @Injectable()
 export class ChatGptStoreService {
+  constructor(
+    private readonly chatGptStoreRepository: ChatGptStoreRepository,
+  ) {}
+  addStore(createChatGptStoreDto: CreateChatGptStoreDto, user_id: number) {
+    return this.chatGptStoreRepository.addStore(createChatGptStoreDto, user_id);
+  }
+
   create(createChatGptStoreDto: CreateChatGptStoreDto) {
     return 'This action adds a new chatGptStore';
   }
 
   findAll() {
-    return `This action returns all chatGptStore`;
+    return this.chatGptStoreRepository.getStoreList();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} chatGptStore`;
+    return this.chatGptStoreRepository.getStoreDetail(id);
   }
 
   update(id: number, updateChatGptStoreDto: UpdateChatGptStoreDto) {
